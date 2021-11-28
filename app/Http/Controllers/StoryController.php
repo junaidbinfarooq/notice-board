@@ -11,7 +11,10 @@ final class StoryController extends Controller
     public function index(): Factory|View
     {
         return view('stories.index', [
-            'stories' => Story::latest()->paginate(18),
+            'stories' =>
+                Story::where('approved', 1)
+                ->latest()
+                ->paginate(10),
         ]);
     }
 
