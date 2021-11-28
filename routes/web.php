@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminStoryController;
+use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StoryController::class, 'index'])->name('home');
 Route::get('stories/{story}', [StoryController::class, 'show']);
+
+Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
+Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
+
+Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
