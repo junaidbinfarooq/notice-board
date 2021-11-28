@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminStoryController;
+use App\Http\Controllers\ApproveStoryController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StoryController;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,5 @@ Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'
 Route::middleware('can:admin')->group(function () {
     Route::get('admin/stories/create', [AdminStoryController::class, 'create']);
     Route::post('admin/stories', [AdminStoryController::class, 'store']);
+    Route::get('admin/stories/{story}/approve', [AdminStoryController::class, 'approve']);
 });
