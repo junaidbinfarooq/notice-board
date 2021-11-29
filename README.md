@@ -73,6 +73,10 @@ Run the following commands to install those libraries and then head to the larav
 
 `npm install --save-dev laravel-echo pusher-js`
 
+More information about the pusher library can be found [here](https://pusher.com/docs/).
+
+Moreover, the queue works needs to be up and running to process the events as they are queued.
+
 ## Login.
 The seeder adds a default admin user. You can login using the following credentials.
 ### Username: admin@example.net
