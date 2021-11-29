@@ -53,3 +53,8 @@ The emails are initially queued and then picked up by a queue worker. To run the
 ```
 php artisan queue:work
 ```
+
+## Login.
+The seeder adds a default admin user. You can login using the following credentials.
+### Username: admin@example.net
+### Password: password
