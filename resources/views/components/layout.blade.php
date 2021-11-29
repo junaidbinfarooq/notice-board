@@ -69,7 +69,7 @@
             <div id="app">
                 <ul>
                     <li v-for="story in stories">
-                        @{{story.title}}
+                        {{--@{{story.title}}--}}
                     </li>
                 </ul>
             </div>
