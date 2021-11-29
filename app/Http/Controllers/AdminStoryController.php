@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StoryApproved;
 use App\Mail\StoryAdded;
 use App\Models\Story;
 use Illuminate\Contracts\View\Factory;
@@ -39,6 +40,8 @@ class AdminStoryController extends Controller
     {
         $story->approved = 1;
         $story->save();
+
+        StoryApproved::dispatch($story);
 
         return redirect()
             ->back()

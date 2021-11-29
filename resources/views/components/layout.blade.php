@@ -1,10 +1,10 @@
 <!doctype html>
 
 <title>Notice board</title>
+
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
@@ -66,8 +66,41 @@
                     .
                 </h5>
             </div>
+            <div id="app">
+                <ul>
+                    <li v-for="story in stories">
+                        @{{story.title}}
+                    </li>
+                </ul>
+            </div>
         </footer>
     </section>
 
     <x-flash/>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            forceTLS: true
+        });
+
+        const channel = pusher.subscribe('stories');
+
+        channel.bind('story-approved', function(data) {
+            app.stories.push(JSON.stringify(data));
+
+            console.log(app.stories);
+        });
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                stories: [],
+            },
+        });
+    </script>
 </body>
