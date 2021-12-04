@@ -7,13 +7,12 @@
                 <form method="POST" action="/admin/stories" enctype="multipart/form-data">
                     @csrf
 
-                    <x-form.input name="title" required />
-                    <x-form.textarea name="description" required />
+                    <x-form.input name="title" required value="{{ old('title') }}"></x-form.input>
+                    <x-form.textarea name="description" required>{{ old('description') }}</x-form.textarea>
 
                     <x-form.button>Publish</x-form.button>
                 </form>
             </x-panel>
         </main>
-        </div>
     </section>
 </x-layout>

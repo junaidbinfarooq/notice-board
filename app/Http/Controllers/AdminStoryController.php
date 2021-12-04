@@ -13,16 +13,17 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class AdminStoryController extends Controller
-{public function create(): Factory|View
 {
+    public function create(): Factory|View
+    {
         return view('admin.stories.create');
     }
 
     public function store(): Redirector|RedirectResponse
     {
         $attributes = request()?->validate([
-            'title' => ['required', Rule::unique('stories', 'title')],
-            'description' => 'required',
+            'title' => ['required', 'min:4', 'max:255', Rule::unique('stories', 'title')],
+            'description' => ['required', 'min:4', 'max:255'],
         ]);
 
         $user = request()?->user();
